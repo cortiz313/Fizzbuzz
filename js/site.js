@@ -30,7 +30,7 @@ function displayString(fizzValue, buzzValue, numbers){
     let className = "";
     let templateRows = "";
     let number;
-    for (let i = 0; i < numbers.length; i++)
+    for (let i = 1; i < numbers.length; i++)
     {
         number = numbers[i];
         if(number % fizzValue == 0 && number % buzzValue == 0)

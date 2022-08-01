@@ -115,10 +115,18 @@ pre[class*="language-"] {
 #btnSubmit{
 background-color: #cf8700;
 color: white;
-font-family: 'Bangers', cursive;
+font-family: 'Mouse Memoirs', sans-serif;
+font-size: large;
 }
 
-#alert{
-    color: rgb(0, 100, 5);
-    font-family: 'IM Fell English', serif;
+
+.tableFont {
+    font-family: 'Mouse Memoirs', sans-serif;
+    font-size: x-large;
+}
+
+.valueFont{
+    
+    font-family: 'Mouse Memoirs', sans-serif;
+    font-size: large;
 }
