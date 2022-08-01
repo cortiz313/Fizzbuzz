@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>Fizz Buzz: A Coding Project By Christian Ortiz</title>
+    <title>Rewind: A Coding Project By Christian Ortiz</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,6 +17,15 @@
     <link href="css/prism.css" rel="stylesheet">
     <link rel="icon" type="image/ico" href="img/favicon/favicon.ico">
 
+    <!--Bangers font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+
+    <!--Google Font for IM Fell English-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English&display=swap" rel="stylesheet">
 
 </head>
 
@@ -25,8 +34,8 @@
     <!-- ==== Nav Section ==== -->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="img/svg/CO Corner.svg" class="d-inline-block align-text-center"
-                    width="60" height="25"> Fizz Buzz</a>
+            <a class="navbar-brand logoFont" href="#"><img src="img/svg/CO Corner.svg" class="d-inline-block align-text-center"
+                    width="60" height="25"> Rewind</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -43,7 +52,7 @@
                         <a class="nav-link active" aria-current="page">The Code</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" target="_blank" href="#">Git Repo</a>
+                        <a class="nav-link" target="_blank" href="https://github.com/cortiz313/Rewind">Git Repo</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" target="_blank" href="#">About</a>
@@ -56,21 +65,61 @@
     <!-- ==== Main Section ==== -->
     <main class="flex-shrink-0">
         <div class="container py-5 px-5 mt-5">
-            <h2 class="border-1 border-bottom border-dark">The Code for Fizz Buzz</h2>
+            <h2 class="border-1 border-bottom border-dark headerFont">The Code for REWIND</h2>
             <div class="row row-cols-1 row-cols-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"> <code class="language-javascript">
-                        // Call Hello World
-                        function helloWorld() {
-                            alert("hello World");
-                        }
+                        // Get the string from the page
+// Controller function
+function getValues(){
+
+    document.getElementById("alert").classList.add("invisible");
+    let userString = document.getElementById("userString").value;
+    let revString = reverseString(userString);
+    displayString(revString);
+}
+
+// Reverse the string
+// Logic Function
+function reverseString(userString){
+
+    let revString = "";
+
+    // reverse a string using a for loop
+    for(let i = userString.length -1; i >= 0; i--)
+        revString += userString[i];
+    return revString;
+
+}
+
+// Display the reversed string to the user
+// View Function
+function displayString(revString){
+
+    // Write to the page
+    document.getElementById("msg").innerHTML = `Your reversed string is: ${revString} `;
+
+    // Show the alert box
+    document.getElementById("alert").classList.remove("invisible");
+}
                     </code>
                     </pre> 
                 </div>
                 <div class="col-lg-4">
-                    <p>The Code is structured in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World"</p>
+                    <p>The Code is structured in three functions.</p>
+                    <h5>getValues()</h5>
+                    <p>getValues is a controller function that gets the string value from the user and passes the string to the reverseString() function. The reversed string that is returned
+                        from that function is then sent to the displayString() function.
+                    </p>
+                    <h5>reverseString()</h5>
+                    <p> reverseString is a logic function that takes a parameter of the userString and returns it in reverse order. With the use of a for loop, we 
+                        concatenate the characters from userString to the variable revString, by starting the for loop at the index of the last character and moving backwards
+                        through the string. We then return the string. 
+                    </p>
+                    <h5>displayString()</h5>
+                    <p> displayString is a display function that receives a reversed string as a parameter and uses the elementID "msg" to pass this string as
+                        output to the user. We also remove the class "invisible" from the alert so that it can be seen by the user.
+                    </p>
                 </div>
 
             </div>
