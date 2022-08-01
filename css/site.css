@@ -13,7 +13,11 @@ body {
 }
 
 .appbody{
-    color: #444444;
+    color: #cf8700;
+}
+
+.instructions{
+    color: #303030;
 }
 
 .logoFont {
@@ -26,8 +30,8 @@ body {
 }
 
 .enterheader {
-    font-family: 'Bangers', cursive;
-    color: #cf8700;
+    font-family: 'Mouse Memoirs', sans-serif;
+    color: #000000;
 }
 
 
@@ -109,7 +113,7 @@ pre[class*="language-"] {
 }
 
 #btnSubmit{
-background-color: rgb(195, 0, 255);
+background-color: #cf8700;
 color: white;
 font-family: 'Bangers', cursive;
 }

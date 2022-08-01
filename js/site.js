@@ -2,32 +2,58 @@
 // Controller function
 function getValues(){
 
-    document.getElementById("alert").classList.add("invisible");
-    let userString = document.getElementById("userString").value;
-    let revString = reverseString(userString);
-    displayString(revString);
+    let fizzValue = document.getElementById("fizz").value;
+    let buzzValue = document.getElementById("buzz").value;
+    let numbers = generateNumbers();
+    displayString(fizzValue, buzzValue, numbers);
 }
 
-// Reverse the string
+// Gather the numbers
 // Logic Function
-function reverseString(userString){
+function generateNumbers(){
 
-    let revString = "";
+    let numbers = [];
 
-    // reverse a string using a for loop
-    for(let i = userString.length -1; i >= 0; i--)
-        revString += userString[i];
-    return revString;
+    // create an array of numbers from 1 to 100
+    for (let i = 0; i <= 100; i++) {
+        // this will execute in a loop until index = 100
+        numbers.push(i);
+    }
+    return numbers;
 
 }
 
-// Display the reversed string to the user
+// Display fizz buzz results to user
 // View Function
-function displayString(revString){
+function displayString(fizzValue, buzzValue, numbers){
 
+    let className = "";
+    let templateRows = "";
+    let number;
+    for (let i = 0; i < numbers.length; i++)
+    {
+        number = numbers[i];
+        if(number % fizzValue == 0 && number % buzzValue == 0)
+        {
+            templateRows += `<tr><td>${"fizz buzz"}</td></tr>`;
+            className = "fizz buzz";
+        }
+        else if (number % fizzValue == 0)
+        {
+            templateRows += `<tr><td>${"fizz"}</td></tr>`;
+            className = "fizz";
+        }
+        else if (number % buzzValue == 0)
+        {
+            templateRows += `<tr><td>${"buzz"}</td></tr>`;
+            className = "buzz";
+        }
+        else{
+            templateRows += `<tr><td>${number}</td></tr>`;
+        }
+
+        
+    }
     // Write to the page
-    document.getElementById("msg").innerHTML = `Your reversed string is: ${revString} `;
-
-    // Show the alert box
-    document.getElementById("alert").classList.remove("invisible");
+   document.getElementById("results").innerHTML = templateRows;
 }
