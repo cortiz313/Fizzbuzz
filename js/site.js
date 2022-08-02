@@ -2,13 +2,32 @@
 // Controller function
 function getValues(){
 
+    // get the user values from the page
     let fizzValue = document.getElementById("fizz").value;
     let buzzValue = document.getElementById("buzz").value;
-    let numbers = generateNumbers();
-    displayString(fizzValue, buzzValue, numbers);
+
+    // parse to turn the strings into integers
+    fizzValue = parseInt(fizzValue);
+    buzzValue = parseInt(buzzValue);
+
+    // check that the numbers are integers
+    if(Number.isInteger(fizzValue) && Number.isInteger(buzzValue))
+    {
+        // generate an array of numbers from 1 to 100
+        let numbers = generateNumbers();
+
+        // write and display data to the screen
+        displayString(fizzValue, buzzValue, numbers);
+    }
+    else
+    {
+        // if not integers, alert the user
+        alert("You must enter integers for the fizz and buzz values.");
+    }
+
 }
 
-// Gather the numbers
+// Gather the numbers in an array
 // Logic Function
 function generateNumbers(){
 
@@ -24,8 +43,16 @@ function generateNumbers(){
 }
 
 // Display fizz buzz results to user
-// View Function
+// View/Logic Function
 function displayString(fizzValue, buzzValue, numbers){
+
+    // get the table body element from the page
+    let tableBody = document.getElementById("results");
+
+    // get the template itself
+    let fbTemplateRow = document.getElementById("fbTemplate");
+
+    // add all the rows to the table
 
     let className = "";
     let templateRows = "";
@@ -35,22 +62,26 @@ function displayString(fizzValue, buzzValue, numbers){
         number = numbers[i];
         if(number % fizzValue == 0 && number % buzzValue == 0)
         {
-            templateRows += `<tr><td>${"fizz buzz"}</td></tr>`;
-            className = "fizz buzz";
+            className = "fizzbuzz";
+            templateRows += `<tr><td class="${className}">${"fizz buzz"}</td></tr>`;
+            
         }
         else if (number % fizzValue == 0)
         {
-            templateRows += `<tr><td>${"fizz"}</td></tr>`;
             className = "fizz";
+            templateRows += `<tr><td class="${className}">${"fizz"}</td></tr>`;
+            
         }
         else if (number % buzzValue == 0)
         {
-            templateRows += `<tr><td>${"buzz"}</td></tr>`;
             className = "buzz";
+            templateRows += `<tr><td class="${className}">${"buzz"}</td></tr>`;
+            
         }
         else{
             templateRows += `<tr><td>${number}</td></tr>`;
         }
+        className="";
 
         
     }

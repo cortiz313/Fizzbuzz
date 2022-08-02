@@ -130,3 +130,14 @@ font-size: large;
     font-family: 'Mouse Memoirs', sans-serif;
     font-size: large;
 }
+
+.fizz{
+    color: green;
+}
+.buzz{
+    color: red;
+}
+
+.fizzbuzz{
+    color: #cf8700;
+}
