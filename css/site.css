@@ -21,7 +21,8 @@ body {
 }
 
 .logoFont {
-    font-family: 'Bangers', cursive;
+    font-family: 'Mouse Memoirs', sans-serif;
+   
 }
 
 .headerFont{
@@ -140,4 +141,5 @@ font-size: large;
 
 .fizzbuzz{
     color: #cf8700;
+    font-weight: bold;
 }

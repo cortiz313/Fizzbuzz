@@ -13,11 +13,10 @@ function getValues(){
     // check that the numbers are integers
     if(Number.isInteger(fizzValue) && Number.isInteger(buzzValue))
     {
-        // generate an array of numbers from 1 to 100
-        let numbers = generateNumbers();
-
+        // call fizzbuzz
+        let fbArray = fizzBuzz(fizzValue, buzzValue);
         // write and display data to the screen
-        displayString(fizzValue, buzzValue, numbers);
+        displayData(fbArray);
     }
     else
     {
@@ -27,24 +26,37 @@ function getValues(){
 
 }
 
-// Gather the numbers in an array
+// Perform the fizzbuzz operation
 // Logic Function
-function generateNumbers(){
+function fizzBuzz(fizzValue, buzzValue){
 
-    let numbers = [];
+    let returnArray = [];
 
-    // create an array of numbers from 1 to 100
-    for (let i = 0; i <= 100; i++) {
-        // this will execute in a loop until index = 100
-        numbers.push(i);
+    for(let i = 1; i <= 100; i++)
+    {
+        // check if i is divisible by both fizz and buzz values first
+        if(i % fizzValue == 0 && i % buzzValue == 0)
+        returnArray.push("fizzbuzz");
+
+        // if not, check if its divisble by the fizz value
+        else if (i % fizzValue == 0)
+        returnArray.push("fizz");
+
+        // if not, check if its divisible by the buzz value
+        else if(i % buzzValue == 0)
+        returnArray.push("buzz");
+
+        // if not, push the numerical value to the array
+        else returnArray.push(i);
     }
-    return numbers;
+
+    return returnArray;
 
 }
 
 // Display fizz buzz results to user
 // View/Logic Function
-function displayString(fizzValue, buzzValue, numbers){
+function displayData(fbArray){
 
     // get the table body element from the page
     let tableBody = document.getElementById("results");
@@ -52,8 +64,28 @@ function displayString(fizzValue, buzzValue, numbers){
     // get the template itself
     let fbTemplateRow = document.getElementById("fbTemplate");
 
-    // add all the rows to the table
+    // clear table first
+    tableBody.innerHTML = "";
 
+    let number;
+    let tableRow;
+
+    for(let i = 0; i < fbArray.length; i++)
+    {
+
+        tableRow = document.importNode(fbTemplateRow.content, true);
+
+        // grab the number of tds in the template
+        let rowCols = tableRow.querySelectorAll("td");
+        rowCols[0].classList.add(fbArray[i]);
+        rowCols[0].textContent = fbArray[i]; 
+
+        tableBody.appendChild(tableRow);
+    }
+
+
+    /* 2ND WAY YOU COULD DO IT
+    NEED AN ARRAY 'numbers' WITH ALL NUMBER 1-100 FOR THIS METHOD
     let className = "";
     let templateRows = "";
     let number;
@@ -87,4 +119,5 @@ function displayString(fizzValue, buzzValue, numbers){
     }
     // Write to the page
    document.getElementById("results").innerHTML = templateRows;
+   */
 }
