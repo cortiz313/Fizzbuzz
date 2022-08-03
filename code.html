@@ -68,54 +68,170 @@
                     <pre class="line-numbers"> <code class="language-javascript">
                         // Get the string from the page
 // Controller function
-function getValues(){
+function getValues() {
 
-    document.getElementById("alert").classList.add("invisible");
-    let userString = document.getElementById("userString").value;
-    let revString = reverseString(userString);
-    displayString(revString);
+    // get the user values from the page
+    let fizzValue = document.getElementById("fizz").value;
+    let buzzValue = document.getElementById("buzz").value;
+
+    // parse to turn the strings into integers
+    fizzValue = parseInt(fizzValue);
+    buzzValue = parseInt(buzzValue);
+
+    // check that the numbers are integers
+    if (Number.isInteger(fizzValue) && Number.isInteger(buzzValue)) {
+
+        // call fizzbuzz
+        let fbArray = fizzBuzzC(fizzValue, buzzValue);
+        // write and display data to the screen
+        displayData(fbArray);
+    } else {
+        // if not integers, alert the user
+        alert("You must enter integers for the fizz and buzz values.");
+    }
+
 }
 
-// Reverse the string
+// Perform the fizzbuzz operation
 // Logic Function
-function reverseString(userString){
+// A third algorithm for fizzbuzz using ternary operators and the truthiness of empty strings
+function fizzBuzzC(fizzValue, buzzValue)
+{
+    let returnArray = [];
 
-    let revString = "";
+    for(let i = 1; i <= 100; i++)
+    {
+        // ternary operators to concatenate fizz or empty string and buzz or empty string. 2 empty strings will evaluate to false, and in that case value = i;
+        let value = ((i % fizzValue == 0 ? "fizz" : "") + (i % buzzValue == 0 ? "buzz" : "") || i );
+        returnArray.push(value);
+    }
 
-    // reverse a string using a for loop
-    for(let i = userString.length -1; i >= 0; i--)
-        revString += userString[i];
-    return revString;
+    return returnArray;
+}
+
+// Alternate/conventional approach to fizz buzz operation
+function fizzBuzz(fizzValue, buzzValue) {
+
+    let returnArray = [];
+
+    for (let i = 1; i <= 100; i++) {
+        // check if i is divisible by both fizz and buzz values first
+        if (i % fizzValue == 0 && i % buzzValue == 0)
+            returnArray.push("fizzbuzz");
+
+        // if not, check if its divisble by the fizz value
+        else if (i % fizzValue == 0)
+            returnArray.push("fizz");
+
+        // if not, check if its divisible by the buzz value
+        else if (i % buzzValue == 0)
+            returnArray.push("buzz");
+
+        // if not, push the numerical value to the array
+        else returnArray.push(i);
+    }
+
+    return returnArray;
 
 }
 
-// Display the reversed string to the user
-// View Function
-function displayString(revString){
+// A different algorithm for fizzbuzz using booleans and switch case
+function fizzBuzzB(fizzValue, buzzValue) {
+    let returnArray = [];
+    let fizz = false;
+    let buzz = false;
 
-    // Write to the page
-    document.getElementById("msg").innerHTML = `Your reversed string is: ${revString} `;
+    for (let i = 1; i < 100; i++) {
+        fizz = i % fizzValue == 0;
+        buzz = i % buzzValue == 0;
 
-    // Show the alert box
-    document.getElementById("alert").classList.remove("invisible");
+        // cases based on the fizz and buzz values
+        switch (true) {
+            case fizz && buzz: {
+                returnArray.push("fizzbuzz");
+                break;
+            }
+            case fizz: {
+                returnArray.push("fizz");
+                break;
+            }
+            case buzz: {
+                returnArray.push("buzz");
+                break;
+            }
+            default:{
+                returnArray.push(i);
+                break;
+            }
+        }
+    }
+    return returnArray;
+}
+
+// Display fizz buzz results to user
+// View/Logic Function
+function displayData(fbArray) {
+
+    // get the table body element from the page
+    let tableBody = document.getElementById("results");
+
+    // get the template itself
+    let fbTemplateRow = document.getElementById("fbTemplate");
+
+    // clear table first
+    tableBody.innerHTML = "";
+
+    let number;
+    let tableRow;
+
+    for (let i = 0; i < fbArray.length; i++) {
+
+        tableRow = document.importNode(fbTemplateRow.content, true);
+
+        // grab the number of tds in the template
+        let rowCols = tableRow.querySelectorAll("td");
+        rowCols[0].classList.add(fbArray[i]);
+        rowCols[0].textContent = fbArray[i];
+
+        tableBody.appendChild(tableRow);
+    }
 }
                     </code>
                     </pre> 
                 </div>
                 <div class="col-lg-4">
-                    <p>The Code is structured in three functions.</p>
+                    <p>The Code is structured in three functions, with 2 alternate approaches to the problem.</p>
                     <h5>getValues()</h5>
-                    <p>getValues is a controller function that gets the string value from the user and passes the string to the reverseString() function. The reversed string that is returned
-                        from that function is then sent to the displayString() function.
+                    <p>getValues is a controller function that gets the numerical values for fizz and buzz and ensures that they are integers.
+                        After that, it passes those values to the fizzBuzzC() method to be processed into an array, and 
+                        then passes that array to displayData() to be shown to the user.
                     </p>
-                    <h5>reverseString()</h5>
-                    <p> reverseString is a logic function that takes a parameter of the userString and returns it in reverse order. With the use of a for loop, we 
-                        concatenate the characters from userString to the variable revString, by starting the for loop at the index of the last character and moving backwards
-                        through the string. We then return the string. 
+                    <h5>fizzBuzzC()</h5>
+                    <p> fizzBuzzC is a logic function that does the fizzbuzz operation with a ternary operator. This is the third and most concise method to accomplish this task.
+                        It takes a set of numbers from 1 to 100, and iterates through them to determine if i is a multiple of the fizz value and the buzz value.
+                        With the ternary operator, we accomplish this in one line. If the modulus operation with fizz returns 0, 
+                        we set value to "fizz", if not we set it to an empty string. We concatenate that with the same operation with the buzz value.
+                        If these both return an empty string, then value temporarily set to an empty string. In the "OR" statement we compare this
+                        empty string to i, and since an empty string has a truthiness value of false, we instead replace the value
+                        with i. We then push that value to the array, and once the loop finishes we return the array.
                     </p>
-                    <h5>displayString()</h5>
-                    <p> displayString is a display function that receives a reversed string as a parameter and uses the elementID "msg" to pass this string as
-                        output to the user. We also remove the class "invisible" from the alert so that it can be seen by the user.
+
+                    <h5>fizzBuzz()  * alternate approach *</h5>
+                    <p> fizzBuzz is a logic function that does the fizzbuzz operation with if-else-if statements. We iterate over the numbers 1-100,
+                        and determine if the number at i is divisible by the fizz and buzz values. If it is divisible by both, we push fizzbuzz to the array,
+                        else we push fizz if its divisible solely by the fizz value, or buzz, or the actual number if it is divisible by none of the above.
+                        After the loop, we return the array.
+                    </p>
+                    <h5>fizzBuzzB()  * alternate approach *</h5>
+                    <p> fizzBuzzB is a logic function that does the fizzbuzz operation with boolean variables and a switch case statement.
+                        Instead of evaluating the fizz and buzz values with if-else-if statements, we use a switch case,
+                        and determine if the boolean variables fizz and buzz are true or false, after setting their value using the modulus operation.
+                        After that, we push the appropriate value to the array, and return it.
+                    </p>
+                    <h5>displayData()</h5>
+                    <p> displayString is a display function that receives the array of fizzbuzz values, and uses the template titled "fbTemplate" in the app.html file
+                        to write the data into a table and then write that table into a variable called "tableBody" which contains a reference to a 
+                        table with the id of "results" in the app.html file. This will display the table of fizzbuzz values to the user.
                     </p>
                 </div>
 

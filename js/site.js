@@ -26,6 +26,22 @@ function getValues() {
 
 // Perform the fizzbuzz operation
 // Logic Function
+// A third algorithm for fizzbuzz using ternary operators and the truthiness of empty strings
+function fizzBuzzC(fizzValue, buzzValue)
+{
+    let returnArray = [];
+
+    for(let i = 1; i <= 100; i++)
+    {
+        // ternary operators to concatenate fizz or empty string and buzz or empty string. 2 empty strings will evaluate to false, and in that case value = i;
+        let value = ((i % fizzValue == 0 ? "fizz" : "") + (i % buzzValue == 0 ? "buzz" : "") || i );
+        returnArray.push(value);
+    }
+
+    return returnArray;
+}
+
+// Alternate/conventional approach to fizz buzz operation
 function fizzBuzz(fizzValue, buzzValue) {
 
     let returnArray = [];
@@ -81,21 +97,6 @@ function fizzBuzzB(fizzValue, buzzValue) {
             }
         }
     }
-    return returnArray;
-}
-
-// A third algorithm for fizzbuzz using ternary operators and the truthiness of empty strings
-function fizzBuzzC(fizzValue, buzzValue)
-{
-    let returnArray = [];
-
-    for(let i = 1; i <= 100; i++)
-    {
-        // ternary operators to concatenate fizz or empty string and buzz or empty string. 2 empty strings will evaluate to false, and in that case value = i;
-        let value = ((i % fizzValue == 0 ? "fizz" : "") + (i % buzzValue == 0 ? "buzz" : "") || i );
-        returnArray.push(value);
-    }
-
     return returnArray;
 }
 
